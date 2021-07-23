@@ -1,6 +1,6 @@
 #! /bin/bash
 # File Name: icewmcc.sh
-# Purpose: all-in-one control centre for IceWM in antiX
+# Purpose: all-in-one control center for IceWM in antiX
 # Authors: OU812 and minor modifications by anticapitalista
 # Latest Change: 24 October 2013 by anticapitalista. Function for ICONS. New look.
 # Latest Change: 16 October 2018 by anticapitalista. Use set gtk icons
@@ -13,7 +13,7 @@ TEXTDOMAIN=icewmcc.sh
 Taskbar=$"Taskbar" Applets=$"Applets" Workspaces=$"Workspaces" Windows=$"Windows"
 
 export IceWMCC=$(cat <<End_of_Text
-<window title="`gettext $"IceWM control centre"`" icon="gnome-control-center" window-position="1">
+<window title="`gettext $"IceWM control center"`" icon="gnome-control-center" window-position="1">
 
 <vbox>
   
