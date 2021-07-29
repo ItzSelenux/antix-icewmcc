@@ -1,0 +1,180 @@
+#! /bin/bash
+# File Name: icewmcc
+# Purpose: all-in-one control center for IceWM in antiX
+# Authors: OU812 and minor modifications by anticapitalista
+# Latest Change: 24 October 2013 by anticapitalista. Function for ICONS. New look.
+# Latest Change: 16 October 2018 by anticapitalista. Use set gtk icons
+# Latest Change: 29 July 2021 by ItzSelenux, use correct paths </usr/bin/ instead of /usr/local/bin/icewmcc>
+
+TEXTDOMAINDIR=/usr/share/locale
+TEXTDOMAIN=icewmcc
+# Options
+#ICONS=/usr/share/icons/antiX
+
+Taskbar=$"Taskbar" Applets=$"Applets" Workspaces=$"Workspaces" Windows=$"Windows"
+
+export IceWMCC=$(cat <<End_of_Text
+<window title="`gettext $"IceWM control center"`" icon="utilities-tweak-tool" window-position="1">
+
+<vbox>
+  
+  <notebook tab-pos="0" labels="$Taskbar|$Applets|$Workspaces|$Windows"> 
+  
+  <vbox>
+    <frame>
+	<hbox>
+	  <vbox>
+                <hbox>
+		  <button>
+		  <input file icon="cs-panel"></input> 
+		  <action>/usr/bin/icewmccshtb &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Show or Hide Taskbar"`"</label>
+		  </text>
+		</hbox>
+                 <hbox>
+		  <button>
+		  <input file icon="computer"></input>
+		  <action>/usr/bin/icewmcctbpos &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Taskbar Position"`"</label>
+		  </text>
+		</hbox>
+		<hbox>
+		  <button>
+		  <input file icon="gnome-settings-default-applications"></input>
+		  <action>/usr/bin/icewmcctbheight &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Double-Height Taskbar"`"</label>
+		  </text>
+		</hbox>
+              </vbox>
+	</hbox>
+    </frame>
+  </vbox>
+  
+  <vbox>
+     <frame>
+	<hbox>
+	  <vbox>
+		<hbox>
+		  <button>
+		  <input file icon="utilities-system-monitor"></input>
+		  <action>/usr/bin/icewmcccpumon &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Toggle CPU Monitor"`"</label>
+		  </text>
+		</hbox>
+                <hbox>
+		  <button>
+		  <input file icon="preferences-system-network"></input>
+		  <action>/usr/bin/icewmccnetmon &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Toggle Network Monitor"`"</label>
+		  </text>
+		</hbox>
+		<hbox>
+		  <button>
+		  <input file icon="internet-mail"></input>
+		  <action>/usr/bin/icewmccmail &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Toggle Mailbox Status"`"</label>
+		  </text>
+		</hbox>
+             </vbox>
+	</hbox>
+	</frame>
+  </vbox>
+
+  <vbox>
+     <frame>
+	<hbox>
+	  <vbox>
+		<hbox>
+		  <button>
+		  <input file icon="printer"></input>
+		  <action>/usr/bin/icewmccshowwkspaces &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Show or Hide Workspaces"`"</label>
+		  </text>
+		</hbox>
+                <hbox>
+		  <button>
+		  <input file icon="cs-workspaces"></input>
+		  <action>/usr/bin/icewmccwkspaces &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Number of Workspaces"`"</label>
+		  </text>
+		</hbox>
+		<hbox>
+		  <button>
+		  <input file icon="gnome-panel-window-menu"></input>
+		  <action>/usr/bin/icewmccwinlist &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Toggle Window List Button"`"</label>
+		  </text>
+		</hbox>
+             </vbox>
+	</hbox>
+	</frame>
+  </vbox>
+
+  <vbox>
+    <frame>
+	<hbox>
+	  <vbox>
+                 <hbox>
+		  <button>
+		  <input file icon="preferences-system-windows-move"></input>
+		  <action>/usr/bin/icewmccmovestat &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Show Move Status"`"</label>
+		  </text>
+		</hbox> 
+                <hbox>
+		  <button>
+		  <input file icon="gnome-window-manager"></input>
+		  <action>/usr/bin/icewmccopmove &</action>
+		  </button>
+		  <text use-markup="true" width-chars="25">
+		  <label>"`gettext $"Enable Opaque Move"`"</label>
+		  </text>
+		</hbox>
+                <hbox>
+                  <button>
+                  <input file icon="preferences-desktop-gestures-screenedges"></input>
+                  <action>/usr/bin/icewmccopresize &</action>
+                  </button>
+                  <text use-markup="true" width-chars="25">
+                  <label>"`gettext $"Enable Opaque Resize"`"</label>
+                  </text>
+                </hbox>      
+	  </vbox>
+	</hbox>
+    </frame>
+  </vbox>
+ </notebook>
+  <hbox>
+	<button>
+	<label>"Close"</label>
+	<input file icon="exit"></input>
+	<action>EXIT:close</action>
+	</button>
+  </hbox>
+</vbox>
+</window>
+End_of_Text
+)
+
+gtkdialog --program=IceWMCC
+unset IceWMCC
